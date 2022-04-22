@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="@drawable/main_bg"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RESULT"
+        android:textSize="45sp"
+        android:textColor="#ffd700"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+
+        android:src="@drawable/res_trophy"
+        android:layout_margin="10dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Congratulations!!"
+        android:textSize="25sp"
+        android:textColor="@color/txt_color"
+        android:textStyle="bold"
+
+        android:layout_marginTop="5dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Username"
+        android:textSize="25sp"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/txt_color"
+        />
+    <TextView
+        android:id="@+id/tv_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your Score is "
+        android:textColor="#ffebcd"
+        android:textSize="15sp"
+
+        android:layout_marginTop="5dp"
+        />
+    <Button
+        android:id="@+id/btn_over"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="20dp"
+        android:text="FINISH"
+        />
+
+
+
+
+
+
+</LinearLayout>

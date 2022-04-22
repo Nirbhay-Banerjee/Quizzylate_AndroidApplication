@@ -1,0 +1,168 @@
+IN THIS PROJECT
+
+A lot of android important functionalities along with software development tips will be covered.
+
+MAJOR LEARNINGS might be advanced ui concepts and also intents.Here we have to work in multiplescreens. 
+
+
+First of all we need to prepare the main activity.
+
+1 In order to remove the actionbar from the main activity we need to change the theme of the app.
+This can be done by creating a new theme in styles.xml...which is exact copy of the default theme but its parent
+instead of darkActionBar will be NoActionBar.
+EACH THEME consists of 3 colors ->primary,primaryDark,primaryLight which can be assigned different values as pleased.
+
+Then in the android manifest file,we can set the theme to this one for the .MainActivity
+The Manifest.xml file basically contains all information about all the activities in the project.
+
+Another important property which we need to edit here is the android:windowSoftInputMode and set it to "adjustResize" **This property adjusts the ui size in accordance
+with the android keyboard becoming visible on the screen.Like here we need to take name of participant in the main activity for which the keyboard will be used,so it
+must not overlap on our ui and cover,in some cases,the component where the text needs to be shown...so it becomes uncomfortable for the user as he cant see what is he
+typing. We need to avoid that so we use this property.
+Other such properties can be explored from manifest column of the android documentation.
+
+
+Properties of individual activities can be modified from here.
+
+Here in the manifest file we add another functionality to prevent the activity from autorotaing.
+This can be done by setting screenOrientation to portrait for that activity.
+
+Another thing to be done is adding the dependency of google material design in the module add level gradle file
+also we need to add "kotlin-android-extensions" id to the project level gradle file 
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+While implementing the ui,
+
+->The main parent layout is linear
+->a card view is used.
+->Inside the card view there is a linear layout which contains buttons and text fields.
+->Background colors have been set.
+->An image bg has been used through drawable folder. 
+
+In order to make a textView have a visible rectangular background borders,we nee dto create a rectangular shape xml in drawable folder and set it as the background for the
+text view.Border can be adjusted through 
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle" >
+        <solid android:color="#9a7b4f" />
+        <stroke android:width="2dp" android:color="@color/white"/>
+    </shape>
+Also added a hint to the text view
+
+The material design repository enables to have a rectangular edit text directly..unlike we have done in the app,where we created the rectangular background
+But i believe it will make the app much heavier so i'll just keep it this way
+
+Learnt about the EditText attribute as well.Simply a text view which is editable
+
+In order to hide the status bar,following can be used
+
+window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
+// Remember that you should never show the action bar if the
+// status bar is hidden, so hide that too if necessary.
+        actionBar?.hide()
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+Now we need to prepare the question ui and make the button responsive and check if the edit text is not empty,then move forward to the next activity.
+First we need to create another activity called QuizQuestions and then using intents we can navigate from this main activity to the QuizQuestion Activity.
+Also another class is to be created which will contain all questions,so we can make it a dataclass cuz it'll contain no functionality,but just the data.
+
+Now to actually add or create the questions we will use object constants(which is available from everywhere) in a new kotlin file (other ways include json parsing and xml etc)
+In the constants object we will add a function called getQuestions which will return an arraylist of questions
+Then we'll create the questions in that function and add it to our ui.
+
+Images in the drawable is of type Int
+
+Done with preparing the questions.
+
+Now we need to build the question ui and add button functionalities to it.
+
+For this purpose we will use a scrollView as the main parent.
+property fillViewport needs to be made true for the scrollView in order to make it screensize adjustable.
+Operating the scrollView
+We can put a linear layout inside a scrollView
+To place images on the screen imageView can be used.
+
+Also operated a progress bar. Progress bars are of 2 types--Determinate and indeterminate.Here we have used a determinate one which shows a particular value that this 
+much is completed.
+Default progress is set to 0
+and max to 5
+minHeight property also used
+The type of progress bar can be changed using style property like style="?android:attr/progressBarStyleHorizontal"
+
+Created another shape and learnt about some more attributes of a shape
+
+-----------------------------------------------------------------------------------
+Data population can be done using simple access through ids
+
+Now a good practice is to create the important variables as global so that they are accessible in the entire project.
+They are initialised with the letter"m" as per convention
+
+Now basically our main aim is to amke ux more clear so we need to have a clear demarcation between selected option and default option
+WE need to change the background and stuff for the option selected by the user so that it looks more presentable.For this we can add onClick listeners to each of the
+option text views and create a function calleed set Selected background which will be called if that tv is selected.We are going to do it this time using a single
+onclick listener for the activity along with a when block
+
+
+The stroke is actually the corner color in the shape layouts we create
+
+
+Now we need to implement the entire logic
+
+TODO
+1 bug is still there that if u click submit and thenu click an option before go to next,it doesnt go to next!!
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Connecting various activities and transferring data between them using intents
+
+CONCEPT OF RESULT ACTIVITIES
+
+What we want is to make the activities interconnected.
+1)So basically from the main activity we click on launch act1 and from it if click on a button we should go back
+to the main activity along with an indication that the activity which we wanted had launched
+
+ACT_MAIN-------> actReq
+        <--------
+   {Activity launched}
+
+2)WE actually fetch some data which the user enters in the second activity and then we go back to the first activity(callingAct) and display that data there!!
+
+
+The process is to create companion objects in the main activity  
+Companion objects  contain kind of a flag as to which activity will send a request
+private const val FIRST_ACTIVITY_REQUEST_CODE = 1 (basically activity name and its request code) so that we can get to the request later on
+
+Then since we require to retrieve a result from the called activity,thus we use startActivity for result method and not the normal startActivity one..Here we pass
+the 1st act req code as a parameter
+
+After this another method called onActivityResult needs to be overriden.this method is what actually retrives the data from another activity and makes it available in the 
+calling activity!
+
+Here first of all we need to check if the resultcode is Activity_ok (basically if its fine)
+and then if the request code is of the first activity only...then do something specific
+if of second activity,then do something else...so on
+
+We can also check for cancelled condition just like ok condition
+
+
+In the called activity,we need to set the result to activity ok (here we need no intents..just do the method)
+
+Whatever information we need to send from another activity is done through intent in form of companion objects thus,a comapnion object for the data must also be 
+created,just like request codes
+
+To send data,in the called activity there must be created another intent and thenwe can use putExtra method which stores values as  key value pairs
+Here the key must be the companion object created for data in the calling activity
+
+And then in the setResult method,make the result activityOk and also pass the intent
+
+Now just like previous case in the calling activity we need to do entries in the onActivityResult method...where first we check if the requestcode is of the 2nd activity
+
+Then do what we need to.To access the extras which are sent through intent the data parameter of this method can be used.Check if the data is not null..then store the
+data.getStringExtra(key) in a variable and use it. Here the key is again the name of the companion object created for data
+
+
+//If we press back button from activity..then REsult_Cancelled is executed
+

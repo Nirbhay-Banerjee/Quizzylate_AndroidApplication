@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@drawable/main_bg"
+    android:gravity="center_vertical"
+    android:padding="20dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="#9a7b4f"
+        android:padding="20dp"
+        app:cardCornerRadius="10dp"
+        android:elevation="10dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Welcome"
+                android:textStyle="bold"
+                android:textSize="40sp"
+                android:textColor="#f8f8ff"
+
+             />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="Please enter your name"
+                android:textStyle="italic"
+                android:textSize="20sp"
+
+                android:textColor="@color/white"
+
+                />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_marginTop="30dp"
+            android:id="@+id/tvName"
+            android:hint="Name"
+
+            android:textColor="@color/white"
+            android:background="@drawable/tv_bg"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:textSize="30sp"
+
+            />
+            <Button
+                android:id="@+id/btnStrt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="30dp"
+                android:backgroundTint="#2e1503"
+                android:textColor="#f8f8ff"
+                android:text="START"
+                />
+</LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
